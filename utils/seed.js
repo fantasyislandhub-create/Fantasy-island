@@ -9,21 +9,33 @@ const seedSuites = async () => {
         {
           title: "The Velvet Lounge",
           price: 580,
-          img: "/src/assets/room-regular.png",
+          img: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&q=80&w=1200",
+          gallery: [
+            "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&q=80&w=1200",
+            "https://images.unsplash.com/photo-1631679706909-1844bbd07221?auto=format&fit=crop&q=80&w=1200"
+          ],
           icon: "Shield",
           features: ["Four curated sessions", "Private obsidian finishes", "Complimentary signature drink", "Soundproof sanctuary"]
         },
         {
           title: "Crimson VIP Suite",
           price: 1000,
-          img: "/src/assets/room-vip.png",
+          img: "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&q=80&w=1200",
+          gallery: [
+            "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&q=80&w=1200",
+            "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&q=80&w=1200"
+          ],
           icon: "Star",
           features: ["Eight immersive sessions", "Private bar & mixologist", "Premium open selection", "Priority concierge access"]
         },
         {
           title: "Royal Obsidian",
           price: 1500,
-          img: "/src/assets/room-royal.png",
+          img: "https://images.unsplash.com/photo-1591088398332-8a77d399ef84?auto=format&fit=crop&q=80&w=1200",
+          gallery: [
+            "https://images.unsplash.com/photo-1591088398332-8a77d399ef84?auto=format&fit=crop&q=80&w=1200",
+            "https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&q=80&w=1200"
+          ],
           icon: "Flame",
           features: ["Unlimited session access", "24/7 Personal concierge", "Full premium complimentary bar", "The peak of luxury"]
         }
