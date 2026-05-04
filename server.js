@@ -39,12 +39,12 @@ app.use('/api/settings', require('./routes/settingsRoutes'));
 
 // ─── Production Configuration ────────────────────────────
 if (process.env.NODE_ENV === 'production') {
-  // Serve static files from the Frontend build folder
-  app.use(express.static(path.join(__dirname, '../Fantasy/dist')));
+  // Serve static files from the local public folder
+  app.use(express.static(path.join(__dirname, 'public')));
 
   // Handle SPA routing
   app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, '../Fantasy', 'dist', 'index.html'));
+    res.sendFile(path.resolve(__dirname, 'public', 'index.html'));
   });
 } else {
   // ─── Health Check (Dev Only) ───────────────────────────
