@@ -8,12 +8,14 @@ const cpUpload = upload.fields([
   { name: 'gallery', maxCount: 6 }
 ]);
 
+const { protect } = require('../middleware/authMiddleware');
+
 router.route('/')
   .get(getSuites)
-  .post(cpUpload, createSuite);
+  .post(protect, cpUpload, createSuite);
 
 router.route('/:id')
-  .patch(cpUpload, updateSuite)
-  .delete(deleteSuite);
+  .patch(protect, cpUpload, updateSuite)
+  .delete(protect, deleteSuite);
 
 module.exports = router;

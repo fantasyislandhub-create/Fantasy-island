@@ -32,10 +32,13 @@ if (process.env.NODE_ENV !== 'production') {
 
 const path = require('path');
 
+const { protect } = require('./middleware/authMiddleware');
+
 // ─── Routes ──────────────────────────────────────────────
-app.use('/api/bookings', require('./routes/bookingRoutes'));
-app.use('/api/suites', require('./routes/suiteRoutes'));
-app.use('/api/settings', require('./routes/settingsRoutes'));
+app.use('/api/auth', require('./routes/authRoutes'));
+app.use('/api/bookings', protect, require('./routes/bookingRoutes'));
+app.use('/api/suites', require('./routes/suiteRoutes')); // GET is public, but let's check mutations
+app.use('/api/settings', protect, require('./routes/settingsRoutes'));
 
 // ─── Production Configuration ────────────────────────────
 if (process.env.NODE_ENV === 'production') {

@@ -55,8 +55,26 @@ const seedSettings = async () => {
   }
 };
 
+const Admin = require('../models/Admin');
+
+const seedAdmin = async () => {
+  try {
+    const count = await Admin.countDocuments();
+    if (count === 0) {
+      const admin = new Admin({
+        username: 'admin',
+        password: 'fantasy2026' // You should change this after first login
+      });
+      await admin.save();
+      console.log('[SEED] Default admin created: admin / fantasy2026');
+    }
+  } catch (error) {
+    console.error('[SEED] Error seeding admin:', error.message);
+  }
+};
+
 const runSeeds = async () => {
-  await Promise.all([seedSuites(), seedSettings()]);
+  await Promise.all([seedSuites(), seedSettings(), seedAdmin()]);
 };
 
 module.exports = runSeeds;
