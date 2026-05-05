@@ -1,5 +1,6 @@
 const Suite = require('../models/Suite');
 const Settings = require('../models/Settings');
+const Tier = require('../models/Tier');
 
 const seedSuites = async () => {
   try {
@@ -67,6 +68,65 @@ const seedSettings = async () => {
   }
 };
 
+const seedTiers = async () => {
+  try {
+    const count = await Tier.countDocuments();
+    if (count === 0) {
+      const tiers = [
+        {
+          title: "Regular",
+          subtitle: "FANTASY",
+          price: 580,
+          period: "/ Reservation",
+          badge: "Regular",
+          order: 1,
+          features: [
+            "Four curated sessions",
+            "Elegantly designed private room",
+            "Complimentary signature drink",
+            "Club facility access",
+            "Standard etiquette policy"
+          ]
+        },
+        {
+          title: "VIP",
+          subtitle: "Pure Indulgence",
+          price: 1000,
+          period: "/ Reservation",
+          badge: "VIP",
+          order: 2,
+          features: [
+            "Eight immersive sessions",
+            "Premium velvet private suite",
+            "Premium open bar (Selection)",
+            "Priority VIP entrance",
+            "Personalized mood lighting"
+          ]
+        },
+        {
+          title: "Membership",
+          subtitle: "Membership",
+          price: 1500,
+          period: "/ Reservation",
+          badge: "Membership",
+          order: 3,
+          features: [
+            "Unlimited sessions access",
+            "The Royal Obsidian Suite",
+            "Full premium complimentary bar",
+            "Personal lifestyle concierge",
+            "24/7 Priority booking"
+          ]
+        }
+      ];
+      await Tier.insertMany(tiers);
+      console.log('[SEED] Tiers seeded successfully');
+    }
+  } catch (error) {
+    console.error('[SEED] Error seeding tiers:', error.message);
+  }
+};
+
 const Admin = require('../models/Admin');
 
 const seedAdmin = async () => {
@@ -86,7 +146,7 @@ const seedAdmin = async () => {
 };
 
 const runSeeds = async () => {
-  await Promise.all([seedSuites(), seedSettings(), seedAdmin()]);
+  await Promise.all([seedSuites(), seedSettings(), seedAdmin(), seedTiers()]);
 };
 
 module.exports = runSeeds;
