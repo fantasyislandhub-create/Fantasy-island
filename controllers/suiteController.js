@@ -19,6 +19,9 @@ exports.createSuite = async (req, res, next) => {
       if (req.files.gallery) suiteData.gallery = req.files.gallery.map(f => f.path);
     }
     
+    // Clean up temporary field
+    delete suiteData.existingGallery;
+    
     if (typeof suiteData.features === 'string') {
       suiteData.features = JSON.parse(suiteData.features);
     }
@@ -40,8 +43,20 @@ exports.updateSuite = async (req, res, next) => {
     
     if (req.files) {
       if (req.files.img) suiteData.img = req.files.img[0].path;
-      if (req.files.gallery) suiteData.gallery = req.files.gallery.map(f => f.path);
+      
+      // Merge existing gallery URLs with newly uploaded files
+      const existingGallery = suiteData.existingGallery ? JSON.parse(suiteData.existingGallery) : [];
+      const newGalleryPaths = req.files.gallery ? req.files.gallery.map(f => f.path) : [];
+      suiteData.gallery = [...existingGallery, ...newGalleryPaths];
+    } else {
+      // No new files uploaded - just keep the existing gallery URLs
+      const existingGallery = suiteData.existingGallery ? JSON.parse(suiteData.existingGallery) : [];
+      if (existingGallery.length > 0) {
+        suiteData.gallery = existingGallery;
+      }
     }
+    // Clean up the temporary field
+    delete suiteData.existingGallery;
 
     if (typeof suiteData.features === 'string') {
       suiteData.features = JSON.parse(suiteData.features);
