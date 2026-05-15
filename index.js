@@ -7,6 +7,7 @@ const dotenv = require('dotenv');
 
 const errorHandler = require('./middleware/errorHandler');
 const runSeeds = require('./utils/seed');
+const { startKeepAlive, getStats } = require('./utils/keepAlive');
 
 // ─── Config ──────────────────────────────────────────────
 dotenv.config();
@@ -33,6 +34,16 @@ if (process.env.NODE_ENV !== 'production') {
 const path = require('path');
 
 const { protect } = require('./middleware/authMiddleware');
+
+// ─── Health Check (always available) ───────────────────
+app.get('/health', (req, res) => {
+  res.status(200).json({
+    status: 'ok',
+    uptime: Math.floor(process.uptime()),
+    timestamp: new Date().toISOString(),
+    keepAlive: getStats()
+  });
+});
 
 // ─── Routes ──────────────────────────────────────────────
 app.use('/api/auth', require('./routes/authRoutes'));
@@ -77,6 +88,7 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/fantasy_i
 
     app.listen(PORT, () => {
       console.log(`[SERVER] Running on port ${PORT} (${process.env.NODE_ENV || 'development'})`);
+      startKeepAlive();
     });
   })
   .catch(err => {
