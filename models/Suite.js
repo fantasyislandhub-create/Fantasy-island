@@ -34,6 +34,11 @@ const suiteSchema = new mongoose.Schema({
     type: Number, 
     default: 7,
     min: [1, 'Maximum days must be at least 1']
+  },
+  durationType: {
+    type: String,
+    enum: ['Night', 'Day'],
+    default: 'Night'
   }
 }, { timestamps: true });
 
