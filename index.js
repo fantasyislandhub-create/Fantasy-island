@@ -17,7 +17,11 @@ const PORT = process.env.PORT || 5000;
 // ─── Security & Parsing ─────────────────────────────────
 app.use(helmet());
 app.use(cors({
-  origin: process.env.CLIENT_URL || '*',
+  origin: [
+    'https://fantasyislandhub.com',
+    'https://www.fantasyislandhub.com',
+    process.env.CLIENT_URL,
+  ].filter(Boolean),
   methods: ['GET', 'POST', 'PATCH', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
