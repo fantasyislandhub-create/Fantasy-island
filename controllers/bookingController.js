@@ -1,6 +1,17 @@
 const Booking = require('../models/Booking');
 const { isValidId } = require('../utils/validators');
 
+exports.getBookingsByEmail = async (req, res, next) => {
+  try {
+    const email = req.params.email.toLowerCase().trim();
+    const bookings = await Booking.find({ email }).sort({ createdAt: -1 }).lean();
+    if (!bookings.length) return res.status(404).json({ success: false, message: 'No bookings found for this email' });
+    res.status(200).json({ success: true, data: bookings });
+  } catch (error) {
+    next(error);
+  }
+};
+
 exports.createBooking = async (req, res, next) => {
   try {
     const booking = await Booking.create(req.body);
