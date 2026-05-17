@@ -35,7 +35,7 @@ const bookingSchema = new mongoose.Schema({
   duration: { 
     type: Number, 
     required: [true, 'Duration is required'],
-    min: [1, 'Minimum stay is 1 night'],
+    min: [3, 'Minimum stay is 3 days'],
     max: [30, 'Maximum stay is 30 nights']
   },
   totalAmount: { 
