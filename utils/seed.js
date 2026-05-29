@@ -56,7 +56,8 @@ const seedSettings = async () => {
       const defaultSettings = [
         { key: 'bank_name', value: 'Fantasy Island Luxury Bank', label: 'Bank Name', category: 'Bank Transfer' },
         { key: 'account_number', value: '1234567890', label: 'Account Number', category: 'Bank Transfer' },
-        { key: 'account_name', value: 'FANTASY ISLAND LIMITED', label: 'Account Name', category: 'Bank Transfer' },
+        { key: 'beneficiary_name', value: 'FANTASY ISLAND LIMITED', label: 'Beneficiary Name', category: 'Bank Transfer' },
+        { key: 'routing_number', value: '021000021', label: 'Routing Number', category: 'Bank Transfer' },
         { key: 'bitcoin_address', value: 'bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh', label: 'Bitcoin Address', category: 'Crypto' },
         { key: 'paypal_client_id', value: 'sb', label: 'PayPal Client ID', category: 'PayPal' },
       ];
