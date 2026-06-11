@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "node --watch index.js",
-    "build": "echo 'Frontend already bundled in public/'"
+    "start": "node init && node index.js",
+    "dev": "node init && node --watch index.js",
+    "build": "node init && echo 'Frontend already bundled in public/'"
   },
   "keywords": [],
   "author": "",
@@ -24,6 +24,7 @@
     "morgan": "^1.10.1",
     "multer": "^2.1.1",
     "multer-storage-cloudinary": "^2.2.1",
-    "node-cron": "^4.2.1"
+    "node-cron": "^4.2.1",
+    "resend": "^6.12.4"
   }
 }

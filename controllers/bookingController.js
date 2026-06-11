@@ -1,5 +1,6 @@
 const Booking = require('../models/Booking');
 const { isValidId } = require('../utils/validators');
+const { notifyAdminNewBooking } = require('../utils/emailService');
 
 exports.getBookingsByEmail = async (req, res, next) => {
   try {
@@ -16,6 +17,10 @@ exports.createBooking = async (req, res, next) => {
   try {
     const booking = await Booking.create(req.body);
     res.status(201).json({ success: true, data: booking });
+    // Fire-and-forget — don't block the response
+    notifyAdminNewBooking(booking).catch(err =>
+      console.error('[EMAIL] Failed to send admin notification:', err.message)
+    );
   } catch (error) {
     next(error);
   }
